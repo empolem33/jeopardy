@@ -25,7 +25,7 @@
   /* box-sizing: border-box;   */
   text-align: center;
   font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
-  background-color: cadetblue;
+  background-color: rgb(154, 215, 218);
 
   }
   
@@ -56,7 +56,7 @@
   #category-row{
     display: flex;
     align-items: center;
-    margin: 20px;
+    margin-bottom: 20px;
     border: 2px solid orange;
   }
   #clue-board{
@@ -65,7 +65,8 @@
   }
 .clue-row{
     display: flex;
-    border: 2px solid orchid;
+    border: 2px solid rgb(194, 103, 0);
+    
 }
   .clue-box{
     display: flex;
@@ -74,4 +75,5 @@
     margin: 5px;
     height: 100px;
     flex: 1;
+    
   }

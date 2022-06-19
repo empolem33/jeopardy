@@ -17,8 +17,17 @@
 // }
 
 
-
+initCatRow()
 initBoard()
+
+function initCatRow(){
+    let catRow = document.getElementById('category-row')
+    for(let j =0; j<6; j++){
+        let box = document.createElement('div')
+        box.className= 'clue-box category-box'
+        catRow.appendChild(box)
+    }
+}
 
 function initBoard() {
     let board = document.getElementById('clue-board')
@@ -35,10 +44,11 @@ function initBoard() {
             box.textContent = "$" + boxValue
             box.addEventListener('click',getClue,false)
             row.appendChild(box)
-            function getClue(){
-                
-            }
-        }
+           
+        } 
         board.appendChild(row)
     }
+}
+function getClue(){
+                
 }
