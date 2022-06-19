@@ -1,28 +1,11 @@
-//Example fetch using pokemonapi.co
-// document.querySelector('button').addEventListener('click', getFetch)
-
-// function getFetch(){
-//   const choice = document.querySelector('input').value
-//   console.log(choice)
-//   const url = ``
-
-//   fetch(url)
-//       .then(res => res.json()) // parse response as JSON
-//       .then(data => {
-//         console.log(data)     
-//       })
-//       .catch(err => {
-//           console.log(`error ${err}`)
-//       });
-// }
-
-
 initCatRow()
 initBoard()
 
+document.querySelector("button").addEventListener('click',buildCategories)
+
 function initCatRow(){
     let catRow = document.getElementById('category-row')
-    for(let j =0; j<6; j++){
+    for(let i =0; i<6; i++){
         let box = document.createElement('div')
         box.className= 'clue-box category-box'
         catRow.appendChild(box)
@@ -49,6 +32,64 @@ function initBoard() {
         board.appendChild(row)
     }
 }
-function getClue(){
-                
+function randInt(){
+    return Math.floor(Math.random()*(18418)+1)
+}
+
+let catArray = []
+
+function buildCategories(){
+
+    const fetchReq1 =fetch(
+        `http://jservice.io/api/category?&id=${randInt()}`
+    ).then((res) => res.json());
+
+    const fetchReq2 =fetch(
+        `http://jservice.io/api/category?&id=${randInt()}`
+    ).then((res) => res.json());
+
+    const fetchReq3 =fetch(
+        `http://jservice.io/api/category?&id=${randInt()}`
+    ).then((res) => res.json());
+
+    const fetchReq4 =fetch(
+        `http://jservice.io/api/category?&id=${randInt()}`
+    ).then((res) => res.json());
+
+    const fetchReq5 =fetch(
+        `http://jservice.io/api/category?&id=${randInt()}`
+    ).then((res) => res.json());
+
+    const fetchReq6 =fetch(
+        `http://jservice.io/api/category?&id=${randInt()}`
+    ).then((res) => res.json());
+
+    const allData = Promise.all([fetchReq1,fetchReq2,fetchReq3,fetchReq4,fetchReq5,fetchReq6])
+    
+    allData.then((res) => {
+        console.log(res)
+        catArray= res
+        setCategories(catArray)
+    })
+
+}
+
+function setCategories(catArray){
+    let element = document.getElementById('category-row')
+        let children= element.children;
+        for(let i=0; i <children.length; i++){
+            children[i].innerHTML= catArray[i].title
+        }
+}
+
+function getClue(event){
+    let child = event.currentTarget
+    child.classList.add('clicked-box')
+    let boxValue = child.innerHTML.slice(1)
+    let index = Array.prototype.findIndex.call(parent.children, (c)=> c === child)
+    let cluesList = catArray[index].clues
+    let clue =cluesList.find(obj => {
+        return obj.value == boxValue
+    }) 
+    showQuestion(clue, child, boxValue)      
 }
